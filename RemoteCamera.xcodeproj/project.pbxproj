@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB829CB12A30B59B00AF7C87 /* CMTime+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */; };
+		AB829CB32A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */; };
 		ABB3BA5C2A301C0300A4EF6C /* PeerRequestCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */; };
 		ABC5EA9B2A2EBAF6001C9988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EA9A2A2EBAF6001C9988 /* AppDelegate.swift */; };
 		ABC5EA9D2A2EBAF6001C9988 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EA9C2A2EBAF6001C9988 /* SceneDelegate.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+Extension.swift"; sourceTree = "<group>"; };
+		AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
 		ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRequestCommands.swift; sourceTree = "<group>"; };
 		ABC5EA972A2EBAF6001C9988 /* RemoteCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC5EA9A2A2EBAF6001C9988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +59,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB829CAF2A30B58D00AF7C87 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */,
+				AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		ABC5EA8E2A2EBAF6001C9988 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +110,7 @@
 		ABC5EAAF2A2EBB07001C9988 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AB829CAF2A30B58D00AF7C87 /* Extensions */,
 				ABC5EABD2A2EC0D4001C9988 /* AssetWriter.swift */,
 				ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */,
 			);
@@ -240,7 +254,9 @@
 				ABC5EAB92A2EBBB1001C9988 /* HostViewModel.swift in Sources */,
 				ABC5EA9D2A2EBAF6001C9988 /* SceneDelegate.swift in Sources */,
 				ABC5EAC52A2EE45A001C9988 /* PeerRequest.swift in Sources */,
+				AB829CB32A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift in Sources */,
 				ABC5EAC02A2ED3E3001C9988 /* Constants.swift in Sources */,
+				AB829CB12A30B59B00AF7C87 /* CMTime+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

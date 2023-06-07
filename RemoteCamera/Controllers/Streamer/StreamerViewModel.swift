@@ -29,6 +29,11 @@ final class StreamerViewModel: NSObject, ObservableObject {
     /// The local URL of the written file
     let fileUrl: URL
     
+    /// A tracked timestamp of the sample buffer.
+    /// This will be the indicator of when this streamer should send video frames
+    /// to the host peer.
+    private var trackedTimestamp: String? = nil
+    
     /// The current recording state of the recording process
     @Published private(set) var recordingState: RecordingState = .notRecording
     
@@ -59,8 +64,39 @@ final class StreamerViewModel: NSObject, ObservableObject {
         recordingState = state
     }
     
+    /// Sends a image data to the host peer, if connected
+    /// - Parameter sbuf: The sample buffer to process and send
+    private func shouldSendVideoFramesToHostPeer(using sbuf: CMSampleBuffer) {
+        guard let connectedPeer else {
+            if trackedTimestamp != nil {
+                trackedTimestamp = nil
+            }
+            return
+        }
+        
+        if let imageData = sbuf.createImageDataFromBuffer() {
+            let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf).durationText
+            
+            if timestamp != trackedTimestamp {
+                trackedTimestamp = timestamp
+                do {
+                    try PeerRequestCommands.sendVideoPreviewFrameCommand(using: peerSession, to: [connectedPeer], imageData: imageData)
+                } catch {
+                    print("error while sending data: \(error.localizedDescription)")
+                }
+            } else {
+                return
+            }
+        }
+    }
+    
     /// Process the sample buffer, append the buffers if currently recording a video
     func sampleBufferCallback(_ sbuf: CMSampleBuffer) {
+        let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf)
+        print("timestamp: \(timestamp.durationText)")
+        
+        shouldSendVideoFramesToHostPeer(using: sbuf)
+        
         switch recordingState {
         case .notRecording:
             break

@@ -185,25 +185,34 @@
                                     </segmentedControl>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5m-X2-F5M">
+                                <rect key="frame" x="32" y="299" width="350" height="547"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WT4-Tg-XO4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ihQ-le-8Zd" firstAttribute="centerX" secondItem="dRh-Vd-RPD" secondAttribute="centerX" id="3iF-8e-ayC"/>
+                            <constraint firstItem="WT4-Tg-XO4" firstAttribute="bottom" secondItem="g5m-X2-F5M" secondAttribute="bottom" constant="16" id="JhD-8s-zbD"/>
+                            <constraint firstItem="g5m-X2-F5M" firstAttribute="top" secondItem="ihQ-le-8Zd" secondAttribute="bottom" constant="32" id="Ti1-Cb-xdH"/>
                             <constraint firstItem="ihQ-le-8Zd" firstAttribute="top" secondItem="WT4-Tg-XO4" secondAttribute="top" constant="24" id="ZQn-6O-DOd"/>
+                            <constraint firstItem="g5m-X2-F5M" firstAttribute="leading" secondItem="WT4-Tg-XO4" secondAttribute="leading" constant="32" id="daa-zE-Out"/>
+                            <constraint firstItem="WT4-Tg-XO4" firstAttribute="trailing" secondItem="g5m-X2-F5M" secondAttribute="trailing" constant="32" id="xhW-w3-ons"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="connectButton" destination="E57-eU-vr4" id="8Pm-rk-JZz"/>
                         <outlet property="connectionStatusLabel" destination="e6a-yl-8F4" id="acP-kt-ywC"/>
                         <outlet property="fpsSegmentedControl" destination="dYg-sj-MZC" id="SYb-gW-Y7K"/>
+                        <outlet property="previewLayerView" destination="g5m-X2-F5M" id="e6X-Mh-uDQ"/>
                         <outlet property="recordButton" destination="Kzh-Fk-ixg" id="shT-b4-eOi"/>
                         <outlet property="seeVideoButton" destination="CPf-hl-KFR" id="aBb-l2-1qD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMW-fO-TCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="-27"/>
+            <point key="canvasLocation" x="950.72463768115949" y="-27.455357142857142"/>
         </scene>
     </scenes>
     <resources>

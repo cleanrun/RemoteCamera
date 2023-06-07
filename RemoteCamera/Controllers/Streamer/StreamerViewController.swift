@@ -56,8 +56,10 @@ final class StreamerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !captureSession.isRunning {
-            captureSession.startRunning()
+        DispatchQueue.global(qos: .background).async { [unowned self] in
+            if !self.captureSession.isRunning {
+                self.captureSession.startRunning()
+            }
         }
     }
     
@@ -147,8 +149,8 @@ final class StreamerViewController: UIViewController {
                 do {
                     try videoCaptureDevice.lockForConfiguration()
                     videoCaptureDevice.activeFormat = vFormat
-                    videoCaptureDevice.activeVideoMinFrameDuration = CMTime(value: 1, timescale: Int32(120))
-                    videoCaptureDevice.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: Int32(120))
+                    videoCaptureDevice.activeVideoMinFrameDuration = CMTime(value: 1, timescale: Int32(24))
+                    videoCaptureDevice.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: Int32(24))
                     videoCaptureDevice.unlockForConfiguration()
                 } catch {
                     print("Could not lock for configuration")

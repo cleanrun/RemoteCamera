@@ -100,12 +100,22 @@ extension HostViewModel: MCSessionDelegate {
         connectedPeers = session.connectedPeers
     }
     
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) { }
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        PeerRequestCommands.handleIncomingData(data: data) { request in
+            switch request.type {
+            case .sendVideoPreviewFrame:
+                viewController?.setPreviewLayerContents(using: request.data)
+            default:
+                return
+            }
+        }
+    }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) { }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         observation = progress.observe(\.fractionCompleted) { progress, _ in
+            // FIXME: If we need a progress bar to indicate the sending process, this will be the starting point to update the bar
             print("completed: \(progress.fractionCompleted), unit count: \(progress.completedUnitCount)")
         }
     }

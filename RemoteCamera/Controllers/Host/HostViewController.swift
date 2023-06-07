@@ -25,6 +25,9 @@ class HostViewController: UIViewController {
     /// A segmented control to switch FPS modes for the streamer peers
     @IBOutlet weak var fpsSegmentedControl: UISegmentedControl!
     
+    /// A view that will have a `CALayer` acting as the preview layer for a connected streamer peer camera feed
+    @IBOutlet weak var previewLayerView: UIView!
+    
     private var viewModel: HostViewModel!
     private var disposables = Set<AnyCancellable>()
 
@@ -65,6 +68,16 @@ class HostViewController: UIViewController {
             .sink { [weak self] value in
                 self?.recordButton.setTitle(value == .isRecording ? "Stop Recording" : "Start Recording", for: .normal)
             }.store(in: &disposables)
+    }
+    
+    /// Sets the preview layer view using the received video frame data
+    /// - Parameter data: The data received from the streamer peer
+    func setPreviewLayerContents(using data: Data) {
+        let imageSource = CGImageSourceCreateWithData(data as CFData, nil)
+        let imageData = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
+        DispatchQueue.main.async { [unowned self] in
+            self.previewLayerView.layer.contents = imageData
+        }
     }
     
     /// Shows the peer browser modal to browse available peers to connect
