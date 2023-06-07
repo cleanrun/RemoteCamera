@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABB3BA5C2A301C0300A4EF6C /* PeerRequestCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */; };
+		ABC5EA9B2A2EBAF6001C9988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EA9A2A2EBAF6001C9988 /* AppDelegate.swift */; };
+		ABC5EA9D2A2EBAF6001C9988 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EA9C2A2EBAF6001C9988 /* SceneDelegate.swift */; };
+		ABC5EA9F2A2EBAF6001C9988 /* StreamerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EA9E2A2EBAF6001C9988 /* StreamerViewController.swift */; };
+		ABC5EAA22A2EBAF6001C9988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC5EAA02A2EBAF6001C9988 /* Main.storyboard */; };
+		ABC5EAA42A2EBAF6001C9988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC5EAA32A2EBAF6001C9988 /* Assets.xcassets */; };
+		ABC5EAA72A2EBAF6001C9988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC5EAA52A2EBAF6001C9988 /* LaunchScreen.storyboard */; };
+		ABC5EAB52A2EBB7A001C9988 /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EAB42A2EBB7A001C9988 /* HostViewController.swift */; };
+		ABC5EAB72A2EBB83001C9988 /* StreamerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EAB62A2EBB83001C9988 /* StreamerViewModel.swift */; };
+		ABC5EAB92A2EBBB1001C9988 /* HostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EAB82A2EBBB1001C9988 /* HostViewModel.swift */; };
+		ABC5EABC2A2EC074001C9988 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EABB2A2EC074001C9988 /* Enums.swift */; };
+		ABC5EABE2A2EC0D4001C9988 /* AssetWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EABD2A2EC0D4001C9988 /* AssetWriter.swift */; };
+		ABC5EAC02A2ED3E3001C9988 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EABF2A2ED3E3001C9988 /* Constants.swift */; };
+		ABC5EAC32A2EE033001C9988 /* RoleChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EAC22A2EE033001C9988 /* RoleChooserViewController.swift */; };
+		ABC5EAC52A2EE45A001C9988 /* PeerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5EAC42A2EE45A001C9988 /* PeerRequest.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRequestCommands.swift; sourceTree = "<group>"; };
+		ABC5EA972A2EBAF6001C9988 /* RemoteCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC5EA9A2A2EBAF6001C9988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ABC5EA9C2A2EBAF6001C9988 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		ABC5EA9E2A2EBAF6001C9988 /* StreamerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerViewController.swift; sourceTree = "<group>"; };
+		ABC5EAA12A2EBAF6001C9988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ABC5EAA32A2EBAF6001C9988 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABC5EAA62A2EBAF6001C9988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ABC5EAA82A2EBAF6001C9988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABC5EAB42A2EBB7A001C9988 /* HostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
+		ABC5EAB62A2EBB83001C9988 /* StreamerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerViewModel.swift; sourceTree = "<group>"; };
+		ABC5EAB82A2EBBB1001C9988 /* HostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViewModel.swift; sourceTree = "<group>"; };
+		ABC5EABB2A2EC074001C9988 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		ABC5EABD2A2EC0D4001C9988 /* AssetWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetWriter.swift; sourceTree = "<group>"; };
+		ABC5EABF2A2ED3E3001C9988 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ABC5EAC22A2EE033001C9988 /* RoleChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleChooserViewController.swift; sourceTree = "<group>"; };
+		ABC5EAC42A2EE45A001C9988 /* PeerRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRequest.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABC5EA942A2EBAF6001C9988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABC5EA8E2A2EBAF6001C9988 = {
+			isa = PBXGroup;
+			children = (
+				ABC5EA992A2EBAF6001C9988 /* RemoteCamera */,
+				ABC5EA982A2EBAF6001C9988 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABC5EA982A2EBAF6001C9988 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EA972A2EBAF6001C9988 /* RemoteCamera.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABC5EA992A2EBAF6001C9988 /* RemoteCamera */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EABA2A2EC06D001C9988 /* Models */,
+				ABC5EAAF2A2EBB07001C9988 /* Utilities */,
+				ABC5EAAE2A2EBAFE001C9988 /* Life Cycle */,
+				ABC5EAB02A2EBB11001C9988 /* Controllers */,
+				ABC5EAB12A2EBB1F001C9988 /* Storyboards */,
+				ABC5EAA32A2EBAF6001C9988 /* Assets.xcassets */,
+				ABC5EAA82A2EBAF6001C9988 /* Info.plist */,
+			);
+			path = RemoteCamera;
+			sourceTree = "<group>";
+		};
+		ABC5EAAE2A2EBAFE001C9988 /* Life Cycle */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EA9A2A2EBAF6001C9988 /* AppDelegate.swift */,
+				ABC5EA9C2A2EBAF6001C9988 /* SceneDelegate.swift */,
+			);
+			path = "Life Cycle";
+			sourceTree = "<group>";
+		};
+		ABC5EAAF2A2EBB07001C9988 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EABD2A2EC0D4001C9988 /* AssetWriter.swift */,
+				ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		ABC5EAB02A2EBB11001C9988 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EAC12A2EE021001C9988 /* Role chooser */,
+				ABC5EAB32A2EBB69001C9988 /* Host */,
+				ABC5EAB22A2EBB63001C9988 /* Streamer */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		ABC5EAB12A2EBB1F001C9988 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EAA02A2EBAF6001C9988 /* Main.storyboard */,
+				ABC5EAA52A2EBAF6001C9988 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		ABC5EAB22A2EBB63001C9988 /* Streamer */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EA9E2A2EBAF6001C9988 /* StreamerViewController.swift */,
+				ABC5EAB62A2EBB83001C9988 /* StreamerViewModel.swift */,
+			);
+			path = Streamer;
+			sourceTree = "<group>";
+		};
+		ABC5EAB32A2EBB69001C9988 /* Host */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EAB42A2EBB7A001C9988 /* HostViewController.swift */,
+				ABC5EAB82A2EBBB1001C9988 /* HostViewModel.swift */,
+			);
+			path = Host;
+			sourceTree = "<group>";
+		};
+		ABC5EABA2A2EC06D001C9988 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EABB2A2EC074001C9988 /* Enums.swift */,
+				ABC5EABF2A2ED3E3001C9988 /* Constants.swift */,
+				ABC5EAC42A2EE45A001C9988 /* PeerRequest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ABC5EAC12A2EE021001C9988 /* Role chooser */ = {
+			isa = PBXGroup;
+			children = (
+				ABC5EAC22A2EE033001C9988 /* RoleChooserViewController.swift */,
+			);
+			path = "Role chooser";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABC5EA962A2EBAF6001C9988 /* RemoteCamera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABC5EAAB2A2EBAF6001C9988 /* Build configuration list for PBXNativeTarget "RemoteCamera" */;
+			buildPhases = (
+				ABC5EA932A2EBAF6001C9988 /* Sources */,
+				ABC5EA942A2EBAF6001C9988 /* Frameworks */,
+				ABC5EA952A2EBAF6001C9988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RemoteCamera;
+			productName = RemoteCamera;
+			productReference = ABC5EA972A2EBAF6001C9988 /* RemoteCamera.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABC5EA8F2A2EBAF6001C9988 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					ABC5EA962A2EBAF6001C9988 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+				};
+			};
+			buildConfigurationList = ABC5EA922A2EBAF6001C9988 /* Build configuration list for PBXProject "RemoteCamera" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABC5EA8E2A2EBAF6001C9988;
+			productRefGroup = ABC5EA982A2EBAF6001C9988 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABC5EA962A2EBAF6001C9988 /* RemoteCamera */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABC5EA952A2EBAF6001C9988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC5EAA72A2EBAF6001C9988 /* LaunchScreen.storyboard in Resources */,
+				ABC5EAA42A2EBAF6001C9988 /* Assets.xcassets in Resources */,
+				ABC5EAA22A2EBAF6001C9988 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABC5EA932A2EBAF6001C9988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC5EAB52A2EBB7A001C9988 /* HostViewController.swift in Sources */,
+				ABC5EABE2A2EC0D4001C9988 /* AssetWriter.swift in Sources */,
+				ABC5EAB72A2EBB83001C9988 /* StreamerViewModel.swift in Sources */,
+				ABC5EA9F2A2EBAF6001C9988 /* StreamerViewController.swift in Sources */,
+				ABC5EAC32A2EE033001C9988 /* RoleChooserViewController.swift in Sources */,
+				ABC5EA9B2A2EBAF6001C9988 /* AppDelegate.swift in Sources */,
+				ABC5EABC2A2EC074001C9988 /* Enums.swift in Sources */,
+				ABB3BA5C2A301C0300A4EF6C /* PeerRequestCommands.swift in Sources */,
+				ABC5EAB92A2EBBB1001C9988 /* HostViewModel.swift in Sources */,
+				ABC5EA9D2A2EBAF6001C9988 /* SceneDelegate.swift in Sources */,
+				ABC5EAC52A2EE45A001C9988 /* PeerRequest.swift in Sources */,
+				ABC5EAC02A2ED3E3001C9988 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ABC5EAA02A2EBAF6001C9988 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABC5EAA12A2EBAF6001C9988 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ABC5EAA52A2EBAF6001C9988 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABC5EAA62A2EBAF6001C9988 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ABC5EAA92A2EBAF6001C9988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABC5EAAA2A2EBAF6001C9988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABC5EAAC2A2EBAF6001C9988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6J2XDDYT2W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RemoteCamera/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses your camera";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses your mics";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cleanrun.RemoteCamera;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABC5EAAD2A2EBAF6001C9988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6J2XDDYT2W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RemoteCamera/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses your camera";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses your mics";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cleanrun.RemoteCamera;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABC5EA922A2EBAF6001C9988 /* Build configuration list for PBXProject "RemoteCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC5EAA92A2EBAF6001C9988 /* Debug */,
+				ABC5EAAA2A2EBAF6001C9988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABC5EAAB2A2EBAF6001C9988 /* Build configuration list for PBXNativeTarget "RemoteCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC5EAAC2A2EBAF6001C9988 /* Debug */,
+				ABC5EAAD2A2EBAF6001C9988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABC5EA8F2A2EBAF6001C9988 /* Project object */;
+}
