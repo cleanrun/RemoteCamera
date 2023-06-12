@@ -149,8 +149,8 @@ final class StreamerViewController: UIViewController {
                 do {
                     try videoCaptureDevice.lockForConfiguration()
                     videoCaptureDevice.activeFormat = vFormat
-                    videoCaptureDevice.activeVideoMinFrameDuration = CMTime(value: 1, timescale: Int32(24))
-                    videoCaptureDevice.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: Int32(24))
+                    videoCaptureDevice.activeVideoMinFrameDuration = CMTime(value: 1, timescale: Int32(120))
+                    videoCaptureDevice.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: Int32(120))
                     videoCaptureDevice.unlockForConfiguration()
                 } catch {
                     print("Could not lock for configuration")
@@ -192,6 +192,8 @@ final class StreamerViewController: UIViewController {
     
     /// Show a video player controller modal
     private func showPlayerModal() {
+        //let asset = AVAsset(url: viewModel.fileUrl)
+        
         let player = AVPlayer(url: viewModel.fileUrl)
         let vc = AVPlayerViewController()
         vc.player = player
@@ -226,6 +228,13 @@ final class StreamerViewController: UIViewController {
             showPlayerModal()
         }
     }
+    
+    /// Returns a `CMFormatDescription` and recommended settings dictionary to set up an asset writer
+    /// - Returns: The format description and recommended settings
+    func getFormatDescriptionAndRecommendedSettings() -> (CMFormatDescription, [String: Any]?) {
+        return (captureDevice.activeFormat.formatDescription,
+                videoDataOutput.recommendedVideoSettingsForAssetWriter(writingTo: .mov))
+    }
 
 }
 
@@ -234,6 +243,11 @@ final class StreamerViewController: UIViewController {
 extension StreamerViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         viewModel.sampleBufferCallback(sampleBuffer)
+    }
+    
+    func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        // FIXME: Handle dropped frames here, might need some research on how to handle it.
+        print("did drop sample buffer")
     }
 }
 

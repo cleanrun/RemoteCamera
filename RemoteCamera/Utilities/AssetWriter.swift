@@ -18,7 +18,8 @@ final class AssetWriter {
     weak var delegate: AssetWriterDelegate?
     
     /// The Output URL of the recorded video
-    private let outputURL: URL
+    @available(iOS, deprecated: 15.0, message: "Output URLS is not set at the beginning of the initialization process anymore, rather than when setting the writer input")
+    private var outputURL: URL!
     
     /// A writer object to write the video and audio buffers
     private(set) var assetWriter: AVAssetWriter!
@@ -40,27 +41,68 @@ final class AssetWriter {
     
     init(outputURL: URL) {
         self.outputURL = outputURL
-        
-        assetVideoWriterInput = AVAssetWriterInput(
-            mediaType: .video,
-            outputSettings: [
-                AVVideoCodecKey: AVVideoCodecType.h264,
-                AVVideoWidthKey: 720,
-                AVVideoHeightKey: 1280,
-                AVVideoCompressionPropertiesKey: [
-                    AVVideoAverageBitRateKey: 2300000
-                ]
-            ])
-        assetAudioWriterInput = AVAssetWriterInput(mediaType: .audio, outputSettings: nil)
-        
-        assetVideoWriterInput.expectsMediaDataInRealTime = true
     }
     
+    /// Sets up all of the writer input objects to start writing video frames
+    /// - Parameters:
+    ///   - metadata: The camera metadata information for this specific writing session
+    ///   - vFormateDescription: The format desctiption used for format hint
+    ///   - recommendedVideoSettings: The recommended video settings retrieved from video data output
+    private func setupWriterInput(metadata: AssetWritingMetadata, vFormatDescription: CMFormatDescription? = nil,recommendedVideoSettings: [String: Any]? = nil) throws {
+        
+        // You have to initialize a new `AVAssetWriter` everytime you want to record a new video.
+        assetWriter = try AVAssetWriter(url: metadata.targetURL, fileType: .mov)
+        assetWriter.shouldOptimizeForNetworkUse = false
+        
+        var recommendedVideoSettings = recommendedVideoSettings
+        if recommendedVideoSettings == nil {
+            let bitsPerPixel: CGFloat
+            if metadata.resolutionWidth * metadata.resolutionHeight < 640 * 480 {
+                bitsPerPixel = 4.05 // Relative to AVCaptureSessionPresetMedium/Low
+            } else {
+                bitsPerPixel = 10.1 // Relative to AVCaptureSessionPresetHigh
+            }
+            
+            let compressionProperties: NSDictionary = [
+                AVVideoAverageBitRateKey: CGFloat(metadata.resolutionWidth) * CGFloat(metadata.resolutionHeight) * bitsPerPixel,
+                AVVideoExpectedSourceFrameRateKey: Double(metadata.fps.rawValue)!,
+                AVVideoMaxKeyFrameIntervalKey: Double(metadata.fps.rawValue)!
+            ]
+            
+            let videoSettings: [String: Any] = [
+                AVVideoCodecKey: AVVideoCodecType.h264,
+                AVVideoWidthKey: metadata.resolutionWidth,
+                AVVideoHeightKey: metadata.resolutionHeight,
+                AVVideoCompressionPropertiesKey: compressionProperties
+            ]
+            
+            recommendedVideoSettings = videoSettings
+        }
+        
+        if assetWriter.canApply(outputSettings: recommendedVideoSettings, forMediaType: .video) {
+            assetVideoWriterInput = AVAssetWriterInput(mediaType: .video, outputSettings: recommendedVideoSettings, sourceFormatHint: vFormatDescription)
+            assetVideoWriterInput.expectsMediaDataInRealTime = true
+            assetVideoWriterInput.transform = CGAffineTransform(rotationAngle: .pi/2)
+            
+            if assetWriter.canAdd(assetVideoWriterInput) {
+                assetWriter.add(assetVideoWriterInput)
+            } else {
+                throw "Asset Writer couldn't add the input"
+            }
+        } else {
+            throw "Asset Writer couldn't apply the output settings"
+        }
+    }
+
     /// Tells the asset writer that the writing process is about to began.
     ///
     /// This method is to be called when the user taps a button to indicate that video recording is about to began.
-    /// - Parameter sourceTime: The starting time of the writing process
-    func prepareForWriting(at sourceTime: CMTime) {
+    /// - Parameters:
+    ///   - metadata: The camera metadata information for this specific writing session
+    ///   - vFormatDescription: The format desctiption used for format hint
+    ///   - recommendedVideoSettings: The recommended video settings retrieved from video data output
+    ///   - sourceTime: The starting time of the writing process
+    func prepareForWriting(metadata: AssetWritingMetadata, vFormatDescription: CMFormatDescription? = nil, recommendedVideoSettings: [String: Any]? = nil, at sourceTime: CMTime) {
         if FileManager.default.fileExists(atPath: outputURL.path) {
             do {
                 try FileManager.default.removeItem(atPath: outputURL.path)
@@ -70,9 +112,15 @@ final class AssetWriter {
         }
         
         // You have to initialize a new `AVAssetWriter` everytime you want to record a new video.
-        assetWriter = try! AVAssetWriter(outputURL: outputURL, fileType: .mov)
-        if assetWriter.canAdd(assetVideoWriterInput) {
-            assetWriter.add(assetVideoWriterInput)
+//        assetWriter = try! AVAssetWriter(outputURL: outputURL, fileType: .mov)
+//        if assetWriter.canAdd(assetVideoWriterInput) {
+//            assetWriter.add(assetVideoWriterInput)
+//        }
+        do {
+            try setupWriterInput(metadata: metadata, vFormatDescription: vFormatDescription, recommendedVideoSettings: recommendedVideoSettings)
+        } catch {
+            print(error.localizedDescription)
+            fatalError("Failed to setup writer input")
         }
         
         isRecording = true
@@ -97,6 +145,7 @@ final class AssetWriter {
         assetWriter.finishWriting { [unowned self] in
             self.atSourceTime = nil
             self.assetWriter = nil
+            self.assetVideoWriterInput = nil
             self.delegate?.didFinishWriting()
         }
     }

@@ -41,6 +41,8 @@ class HostViewController: UIViewController {
     /// Sets up the UI components
     private func setupUI() {
         fpsSegmentedControl.addTarget(self, action: #selector(segmentedControlAction(_:)), for: .valueChanged)
+        
+        previewLayerView.layer.contentsGravity = .resizeAspectFill
     }
     
     /// Sets up the property observers from the view model
@@ -53,6 +55,7 @@ class HostViewController: UIViewController {
                     self?.connectionStatusLabel.text = "Not connected"
                     self?.recordButton.isHidden = true
                     self?.fpsSegmentedControl.isHidden = true
+                    self?.connectButton.setTitle("Connect", for: .normal)
                     return
                 }
                 
@@ -60,6 +63,7 @@ class HostViewController: UIViewController {
                 self?.connectionStatusLabel.text = "Connected to: \(peers)"
                 self?.recordButton.isHidden = false
                 self?.fpsSegmentedControl.isHidden = false
+                self?.connectButton.setTitle("Disconnect", for: .normal)
             }.store(in: &disposables)
         
         viewModel

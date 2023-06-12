@@ -92,17 +92,20 @@ final class StreamerViewModel: NSObject, ObservableObject {
     
     /// Process the sample buffer, append the buffers if currently recording a video
     func sampleBufferCallback(_ sbuf: CMSampleBuffer) {
-        let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf)
-        print("timestamp: \(timestamp.durationText)")
-        
         shouldSendVideoFramesToHostPeer(using: sbuf)
+        //print("dimension height: \(sbuf.formatDescription?.dimensions.height ?? 99), width: \(sbuf.formatDescription?.dimensions.width ?? 99)")
         
         switch recordingState {
         case .notRecording:
             break
         case .prepareForRecording:
             let sourceTime = CMSampleBufferGetPresentationTimeStamp(sbuf)
-            assetWriter.prepareForWriting(at: sourceTime)
+            let formatDescriptionAndRecommendedSettings = viewController?.getFormatDescriptionAndRecommendedSettings()
+            let metadata = AssetWritingMetadata(targetURL: fileUrl, fps: .oneTwenty, resolutionWidth: 720, resolutionHeight: 1280)
+            assetWriter.prepareForWriting(metadata: metadata,
+                                          vFormatDescription: formatDescriptionAndRecommendedSettings?.0,
+                                          recommendedVideoSettings: formatDescriptionAndRecommendedSettings?.1,
+                                          at: sourceTime)
             changeRecordingState(.isRecording)
         case .isRecording:
             assetWriter.appendFrames(sbuf)
@@ -149,7 +152,6 @@ extension StreamerViewModel: MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         PeerRequestCommands.handleIncomingData(data: data) { request in
-            print("type: \(request.type.rawValue)")
             switch request.type {
             case .changeRecordingStatus:
                 changeRecordingState(RecordingState(rawValue: request.dataToString!)!)
