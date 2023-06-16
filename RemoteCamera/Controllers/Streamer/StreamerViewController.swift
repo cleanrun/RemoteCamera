@@ -50,7 +50,7 @@ final class StreamerViewController: UIViewController {
         super.viewDidLoad()
         viewModel = StreamerViewModel(viewController: self)
         setupBindings()
-        setupPreviewLayer()
+        setupCaptureSession()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,10 +96,10 @@ final class StreamerViewController: UIViewController {
     }
     
     /// Sets up the preview layer and capture sessions
-    private func setupPreviewLayer() {
+    private func setupCaptureSession() {
         captureSession = AVCaptureSession()
         // This is set to reduce memory consumption, bigger resolution means more memory consumption
-        captureSession.sessionPreset = .hd1280x720
+        captureSession.sessionPreset = .iFrame1280x720
         
         let devices = AVCaptureDevice.DiscoverySession.init(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .back).devices
         
@@ -149,8 +149,8 @@ final class StreamerViewController: UIViewController {
                 do {
                     try videoCaptureDevice.lockForConfiguration()
                     videoCaptureDevice.activeFormat = vFormat
-                    videoCaptureDevice.activeVideoMinFrameDuration = CMTime(value: 1, timescale: Int32(120))
-                    videoCaptureDevice.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: Int32(120))
+                    videoCaptureDevice.activeVideoMinFrameDuration = CMTime(value: 1, timescale: Int32(24))
+                    videoCaptureDevice.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: Int32(24))
                     videoCaptureDevice.unlockForConfiguration()
                 } catch {
                     print("Could not lock for configuration")
@@ -242,12 +242,15 @@ final class StreamerViewController: UIViewController {
 
 extension StreamerViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        viewModel.sampleBufferCallback(sampleBuffer)
+        autoreleasepool {
+            viewModel.sampleBufferCallback(sampleBuffer)
+        }
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // FIXME: Handle dropped frames here, might need some research on how to handle it.
-        print("did drop sample buffer")
+        var mode: CMAttachmentMode = 0
+        let reason = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_DroppedFrameReason, attachmentModeOut: &mode)
+        print("did drop sample buffer, reason: \(String(describing: reason))")
     }
 }
 

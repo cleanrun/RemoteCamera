@@ -26,3 +26,15 @@ enum FPSState: String, Codable {
     case oneTwenty = "120"
     case twoFourty = "240"
 }
+
+enum NALUType {
+    case sps
+    case pps
+    case vcl
+}
+
+enum EncoderConfigurationError: Error {
+    case failedCreateSession
+    case failedSetProperties
+    case cannotPrepareToEncode
+}

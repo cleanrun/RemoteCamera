@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB1535F92A3B44A8006F1F5D /* H264Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1535F82A3B44A8006F1F5D /* H264Encoder.swift */; };
+		AB1535FB2A3B5966006F1F5D /* H264Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1535FA2A3B5966006F1F5D /* H264Decoder.swift */; };
+		AB1535FD2A3B59BB006F1F5D /* H264Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1535FC2A3B59BB006F1F5D /* H264Unit.swift */; };
+		AB1535FF2A3B5B89006F1F5D /* NALUParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1535FE2A3B5B89006F1F5D /* NALUParser.swift */; };
+		AB196EE32A3BFA0E00B4D8FA /* HostPeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB196EE22A3BFA0E00B4D8FA /* HostPeerSession.swift */; };
+		AB196EE52A3BFA1700B4D8FA /* StreamerPeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB196EE42A3BFA1700B4D8FA /* StreamerPeerSession.swift */; };
+		AB7E25EA2A38330C009ABFBF /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */; };
 		AB829CB12A30B59B00AF7C87 /* CMTime+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */; };
 		AB829CB32A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */; };
 		ABB3BA5C2A301C0300A4EF6C /* PeerRequestCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */; };
@@ -30,6 +37,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB1535F82A3B44A8006F1F5D /* H264Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H264Encoder.swift; sourceTree = "<group>"; };
+		AB1535FA2A3B5966006F1F5D /* H264Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H264Decoder.swift; sourceTree = "<group>"; };
+		AB1535FC2A3B59BB006F1F5D /* H264Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H264Unit.swift; sourceTree = "<group>"; };
+		AB1535FE2A3B5B89006F1F5D /* NALUParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NALUParser.swift; sourceTree = "<group>"; };
+		AB196EE22A3BFA0E00B4D8FA /* HostPeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPeerSession.swift; sourceTree = "<group>"; };
+		AB196EE42A3BFA1700B4D8FA /* StreamerPeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerPeerSession.swift; sourceTree = "<group>"; };
+		AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
 		AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+Extension.swift"; sourceTree = "<group>"; };
 		AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
 		ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRequestCommands.swift; sourceTree = "<group>"; };
@@ -72,6 +86,7 @@
 				AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */,
 				ABB49B942A36B5DB00A70516 /* String+Extension.swift */,
 				ABB49B962A36D58600A70516 /* URL+Extension.swift */,
+				AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -121,6 +136,9 @@
 				AB829CAF2A30B58D00AF7C87 /* Extensions */,
 				ABC5EABD2A2EC0D4001C9988 /* AssetWriter.swift */,
 				ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */,
+				AB1535F82A3B44A8006F1F5D /* H264Encoder.swift */,
+				AB1535FA2A3B5966006F1F5D /* H264Decoder.swift */,
+				AB1535FE2A3B5B89006F1F5D /* NALUParser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -149,6 +167,7 @@
 			children = (
 				ABC5EA9E2A2EBAF6001C9988 /* StreamerViewController.swift */,
 				ABC5EAB62A2EBB83001C9988 /* StreamerViewModel.swift */,
+				AB196EE42A3BFA1700B4D8FA /* StreamerPeerSession.swift */,
 			);
 			path = Streamer;
 			sourceTree = "<group>";
@@ -158,6 +177,7 @@
 			children = (
 				ABC5EAB42A2EBB7A001C9988 /* HostViewController.swift */,
 				ABC5EAB82A2EBBB1001C9988 /* HostViewModel.swift */,
+				AB196EE22A3BFA0E00B4D8FA /* HostPeerSession.swift */,
 			);
 			path = Host;
 			sourceTree = "<group>";
@@ -169,6 +189,7 @@
 				ABC5EABF2A2ED3E3001C9988 /* Constants.swift */,
 				ABC5EAC42A2EE45A001C9988 /* PeerRequest.swift */,
 				ABB49B922A36B3F800A70516 /* AssetWritingMetadata.swift */,
+				AB1535FC2A3B59BB006F1F5D /* H264Unit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,11 +273,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB1535FF2A3B5B89006F1F5D /* NALUParser.swift in Sources */,
 				ABB49B952A36B5DB00A70516 /* String+Extension.swift in Sources */,
 				ABC5EAB52A2EBB7A001C9988 /* HostViewController.swift in Sources */,
+				AB1535FB2A3B5966006F1F5D /* H264Decoder.swift in Sources */,
 				ABC5EABE2A2EC0D4001C9988 /* AssetWriter.swift in Sources */,
+				AB196EE32A3BFA0E00B4D8FA /* HostPeerSession.swift in Sources */,
 				ABB49B932A36B3F800A70516 /* AssetWritingMetadata.swift in Sources */,
 				ABC5EAB72A2EBB83001C9988 /* StreamerViewModel.swift in Sources */,
+				AB7E25EA2A38330C009ABFBF /* CGImage+Extension.swift in Sources */,
 				ABC5EA9F2A2EBAF6001C9988 /* StreamerViewController.swift in Sources */,
 				ABC5EAC32A2EE033001C9988 /* RoleChooserViewController.swift in Sources */,
 				ABC5EA9B2A2EBAF6001C9988 /* AppDelegate.swift in Sources */,
@@ -264,11 +289,14 @@
 				ABB3BA5C2A301C0300A4EF6C /* PeerRequestCommands.swift in Sources */,
 				ABB49B972A36D58600A70516 /* URL+Extension.swift in Sources */,
 				ABC5EAB92A2EBBB1001C9988 /* HostViewModel.swift in Sources */,
+				AB1535F92A3B44A8006F1F5D /* H264Encoder.swift in Sources */,
 				ABC5EA9D2A2EBAF6001C9988 /* SceneDelegate.swift in Sources */,
 				ABC5EAC52A2EE45A001C9988 /* PeerRequest.swift in Sources */,
 				AB829CB32A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift in Sources */,
+				AB1535FD2A3B59BB006F1F5D /* H264Unit.swift in Sources */,
 				ABC5EAC02A2ED3E3001C9988 /* Constants.swift in Sources */,
 				AB829CB12A30B59B00AF7C87 /* CMTime+Extension.swift in Sources */,
+				AB196EE52A3BFA1700B4D8FA /* StreamerPeerSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

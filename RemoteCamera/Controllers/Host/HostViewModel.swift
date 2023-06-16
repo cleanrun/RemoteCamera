@@ -69,6 +69,11 @@ final class HostViewModel: NSObject, ObservableObject {
         }
     }
     
+    /// Disconnects from the connected peer
+    func disconnectFromPeer() {
+        peerSession.disconnect()
+    }
+    
     /// Change the current FPS
     ///
     /// This will send a command request to all of the connected streamer peers.

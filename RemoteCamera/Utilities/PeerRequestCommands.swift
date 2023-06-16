@@ -49,7 +49,7 @@ final class PeerRequestCommands {
         using session: MCSession,
         to peers: [MCPeerID],
         fps: FPSState) throws {
-            let request = PeerRequesMakeChangeFPSRequest(fps)
+            let request = PeerRequestMakeChangeFPSRequest(fps)
             let encoder = JSONEncoder()
             let requestData = try encoder.encode(request)
             try session.send(requestData, toPeers: peers, with: .reliable)

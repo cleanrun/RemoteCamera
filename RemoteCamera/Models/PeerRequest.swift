@@ -56,6 +56,6 @@ func PeerRequestMakeSendVideoFrameRequest(_ image: Data) -> PeerRequest {
 /// Creates a request to send a video frame data
 /// - Parameter image: The video frame data, this should be a `CGImage` converted to `Data`
 /// - Returns: Returns a `PeerRequest` object based on the requirements
-func PeerRequesMakeChangeFPSRequest(_ fps: FPSState) -> PeerRequest {
+func PeerRequestMakeChangeFPSRequest(_ fps: FPSState) -> PeerRequest {
     PeerRequest(type: .changeFPS, data: fps.rawValue.data(using: .utf8)!)
 }

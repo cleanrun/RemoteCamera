@@ -74,29 +74,27 @@ final class StreamerViewModel: NSObject, ObservableObject {
             return
         }
         
-        if let imageData = sbuf.createImageDataFromBuffer() {
-            let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf).durationText
-            
-            if timestamp != trackedTimestamp {
-                trackedTimestamp = timestamp
-                do {
-                    try PeerRequestCommands.sendVideoPreviewFrameCommand(using: peerSession, to: [connectedPeer], imageData: imageData)
-                } catch {
-                    print("error while sending data: \(error.localizedDescription)")
-                }
-            } else {
-                return
+        let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf).durationText
+        
+        guard timestamp != trackedTimestamp else { return }
+        
+        if let imageData = sbuf.createCGImageDataFromBuffer() {
+            trackedTimestamp = timestamp
+            do {
+                try PeerRequestCommands.sendVideoPreviewFrameCommand(using: peerSession, to: [connectedPeer], imageData: imageData)
+            } catch {
+                print("error while sending data: \(error.localizedDescription)")
             }
         }
     }
     
     /// Process the sample buffer, append the buffers if currently recording a video
-    func sampleBufferCallback(_ sbuf: CMSampleBuffer) {
-        shouldSendVideoFramesToHostPeer(using: sbuf)
+    func sampleBufferCallback(_ sbuf: CMSampleBuffer) {        
         //print("dimension height: \(sbuf.formatDescription?.dimensions.height ?? 99), width: \(sbuf.formatDescription?.dimensions.width ?? 99)")
         
         switch recordingState {
         case .notRecording:
+            shouldSendVideoFramesToHostPeer(using: sbuf)
             break
         case .prepareForRecording:
             let sourceTime = CMSampleBufferGetPresentationTimeStamp(sbuf)

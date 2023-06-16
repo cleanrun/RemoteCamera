@@ -48,7 +48,9 @@ final class AssetWriter {
     ///   - metadata: The camera metadata information for this specific writing session
     ///   - vFormateDescription: The format desctiption used for format hint
     ///   - recommendedVideoSettings: The recommended video settings retrieved from video data output
-    private func setupWriterInput(metadata: AssetWritingMetadata, vFormatDescription: CMFormatDescription? = nil,recommendedVideoSettings: [String: Any]? = nil) throws {
+    private func setupWriterInput(metadata: AssetWritingMetadata,
+                                  vFormatDescription: CMFormatDescription? = nil,
+                                  recommendedVideoSettings: [String: Any]? = nil) throws {
         
         // You have to initialize a new `AVAssetWriter` everytime you want to record a new video.
         assetWriter = try AVAssetWriter(url: metadata.targetURL, fileType: .mov)
