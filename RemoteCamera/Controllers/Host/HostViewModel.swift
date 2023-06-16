@@ -22,6 +22,12 @@ final class HostViewModel: NSObject, ObservableObject {
     /// A view controller to browse and invite available peers
     let peerBrowserVc: MCBrowserViewController
     
+    /// A parser object to parse nalu data stream
+    private var naluParser = NALUParser()
+    
+    /// A helper object to decode incoming video frame data stream
+    private var decoder: H264Decoder
+    
     private weak var viewController: HostViewController?
     
     let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("output.mov")
@@ -42,6 +48,7 @@ final class HostViewModel: NSObject, ObservableObject {
         peerSession = MCSession(peer: peerId, securityIdentity: nil, encryptionPreference: .none)
         peerBrowser = MCNearbyServiceBrowser(peer: peerId, serviceType: bonjourServiceType)
         peerBrowserVc = MCBrowserViewController(serviceType: bonjourServiceType, session: peerSession)
+        decoder = H264Decoder()
         
         self.viewController = viewController
         
@@ -96,6 +103,35 @@ final class HostViewModel: NSObject, ObservableObject {
         try peerSession.send(requestData, toPeers: connectedPeers, with: .reliable)
     }
     
+    /// Handle incoming sample buffer data stream and decode it
+    func setSampleBufferCallback() {
+        decoder.sbufCallback = { [unowned self] sbuf in
+            self.viewController?.enqueueSampleBufferLayer(sbuf)
+        }
+    }
+    
+    /// Parse incoming NALU data stream
+    private func setNALUParserDataHandler() {
+        naluParser.unitHandler = { [decoder] unit in
+            decoder.decode(unit)
+        }
+    }
+    
+    /// Retrieve incoming stream from another peer
+    /// - Parameter stream: The input stream received from another peer
+    private func retrieveStream(from stream: InputStream) {
+        let bufferSize = 8192
+        var buffer = [UInt8](repeating: 0, count: bufferSize)
+        DispatchQueue.global(qos: .background).async { [unowned self] in
+            let numberBytes = stream.read(&buffer, maxLength: bufferSize)
+            let data = Data(referencing: NSData(bytes: &buffer, length: numberBytes))
+            
+            self.naluParser.enqueue(data)
+            self.setNALUParserDataHandler()
+            self.setSampleBufferCallback()
+        }
+    }
+    
 }
 
 // MARK: - Session Delegate
@@ -116,7 +152,11 @@ extension HostViewModel: MCSessionDelegate {
         }
     }
     
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) { }
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        stream.delegate = self
+        stream.schedule(in: RunLoop.main, forMode: .default)
+        stream.open()
+    }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         observation = progress.observe(\.fractionCompleted) { progress, _ in
@@ -171,5 +211,20 @@ extension HostViewModel: MCBrowserViewControllerDelegate {
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
+    }
+}
+
+// MARK: - Stream Delegate
+
+extension HostViewModel: StreamDelegate {
+    func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+        switch eventCode {
+        case .hasBytesAvailable:
+            retrieveStream(from: aStream as! InputStream)
+        case .hasSpaceAvailable:
+            print("hasSpaceAvailable")
+        default:
+            break
+        }
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import AVFoundation
 
 class HostViewController: UIViewController {
     
@@ -28,6 +29,8 @@ class HostViewController: UIViewController {
     /// A view that will have a `CALayer` acting as the preview layer for a connected streamer peer camera feed
     @IBOutlet weak var previewLayerView: UIView!
     
+    private var sampleBufferDisplayLayer: AVSampleBufferDisplayLayer!
+    
     private var viewModel: HostViewModel!
     private var disposables = Set<AnyCancellable>()
 
@@ -42,7 +45,13 @@ class HostViewController: UIViewController {
     private func setupUI() {
         fpsSegmentedControl.addTarget(self, action: #selector(segmentedControlAction(_:)), for: .valueChanged)
         
-        previewLayerView.layer.contentsGravity = .resizeAspectFill
+        //previewLayerView.layer.contentsGravity = .resizeAspectFill
+        
+        sampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
+        sampleBufferDisplayLayer.bounds = previewLayerView.bounds
+        sampleBufferDisplayLayer.position = CGPoint(x: CGRectGetMidX(previewLayerView.bounds), y: CGRectGetMidY(previewLayerView.bounds))
+        sampleBufferDisplayLayer.videoGravity = .resizeAspect
+        previewLayerView.layer.addSublayer(sampleBufferDisplayLayer)
     }
     
     /// Sets up the property observers from the view model
@@ -54,7 +63,7 @@ class HostViewController: UIViewController {
                 guard !value.isEmpty else {
                     self?.connectionStatusLabel.text = "Not connected"
                     self?.recordButton.isHidden = true
-                    self?.fpsSegmentedControl.isHidden = true
+                    //self?.fpsSegmentedControl.isHidden = true
                     self?.connectButton.setTitle("Connect", for: .normal)
                     return
                 }
@@ -62,7 +71,7 @@ class HostViewController: UIViewController {
                 let peers = String(describing: value.map{ $0.displayName })
                 self?.connectionStatusLabel.text = "Connected to: \(peers)"
                 self?.recordButton.isHidden = false
-                self?.fpsSegmentedControl.isHidden = false
+                //self?.fpsSegmentedControl.isHidden = false
                 self?.connectButton.setTitle("Disconnect", for: .normal)
             }.store(in: &disposables)
         
@@ -87,6 +96,10 @@ class HostViewController: UIViewController {
     /// Shows the peer browser modal to browse available peers to connect
     private func showPeerBrowserModal() {
         present(viewModel.peerBrowserVc, animated: true)
+    }
+    
+    func enqueueSampleBufferLayer(_ sbuf: CMSampleBuffer) {
+        sampleBufferDisplayLayer.enqueue(sbuf)
     }
     
     @IBAction private func buttonActions(_ sender: UIButton) {

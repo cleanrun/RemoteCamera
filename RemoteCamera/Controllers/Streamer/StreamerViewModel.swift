@@ -20,8 +20,17 @@ final class StreamerViewModel: NSObject, ObservableObject {
     /// The current peer session
     private let peerSession: MCSession
     
+    /// The stream object that will stream the camera feed
+    private var viewFinderStream: OutputStream?
+    
+    /// The error of the stream, if any
+    private var viewFinderStreamError: Error?
+    
     /// The object to write buffer frames and locate it into a certain URL
     private var assetWriter: AssetWriter
+    
+    /// The object to encode/compress sample buffers retrieved from the video feed
+    private var encoder: H264Encoder
     
     /// The view controller attached to this view model
     private weak var viewController: StreamerViewController?
@@ -48,6 +57,7 @@ final class StreamerViewModel: NSObject, ObservableObject {
         peerAdvertiser = MCNearbyServiceAdvertiser(peer: peerId, discoveryInfo: nil, serviceType: bonjourServiceType)
         
         assetWriter = AssetWriter(outputURL: fileUrl)
+        encoder = H264Encoder()
         
         self.viewController = viewController
         
@@ -57,6 +67,14 @@ final class StreamerViewModel: NSObject, ObservableObject {
         peerSession.delegate = self
         peerAdvertiser.delegate = self
         peerAdvertiser.startAdvertisingPeer()
+        
+        do {
+            try encoder.configureCompressionSession()
+            encoder.naluHandler = naluHandlingCallback(_:)
+        } catch {
+            print(error)
+        }
+        
     }
     
     /// Changes the current recording state
@@ -89,12 +107,11 @@ final class StreamerViewModel: NSObject, ObservableObject {
     }
     
     /// Process the sample buffer, append the buffers if currently recording a video
-    func sampleBufferCallback(_ sbuf: CMSampleBuffer) {        
-        //print("dimension height: \(sbuf.formatDescription?.dimensions.height ?? 99), width: \(sbuf.formatDescription?.dimensions.width ?? 99)")
-        
+    func sampleBufferCallback(_ sbuf: CMSampleBuffer) {
         switch recordingState {
         case .notRecording:
-            shouldSendVideoFramesToHostPeer(using: sbuf)
+            //shouldSendVideoFramesToHostPeer(using: sbuf)
+            encoder.encode(sbuf)
             break
         case .prepareForRecording:
             let sourceTime = CMSampleBufferGetPresentationTimeStamp(sbuf)
@@ -110,6 +127,17 @@ final class StreamerViewModel: NSObject, ObservableObject {
         case .finishedRecording:
             assetWriter.finishWriting()
             changeRecordingState(.notRecording)
+        }
+    }
+    
+    /// Handle incoming encoded NALU information
+    /// - Parameter data: The NALU object represented in `Data`
+    func naluHandlingCallback(_ data: Data) {
+        if let viewFinderStream {
+            data.withUnsafeBytes({
+                guard let pointer = $0.bindMemory(to: UInt8.self).baseAddress else { return }
+                viewFinderStream.write(pointer, maxLength: data.count)
+            })
         }
     }
     
@@ -139,6 +167,25 @@ final class StreamerViewModel: NSObject, ObservableObject {
             peerSession.sendResource(at: fileUrl, withName: "output_video", toPeer: connectedPeer)
         }
     }
+    
+    /// Start a stream that streams the camera feed
+    /// - Parameter peerID: The peer that the stream is meant to
+    private func startViewFinderStream(to peerID: MCPeerID) {
+        do {
+            viewFinderStream = try peerSession.startStream(withName: "viewfinder-stream", toPeer: peerID)
+            viewFinderStream?.schedule(in: RunLoop.main, forMode: .default)
+            viewFinderStream?.open()
+        } catch {
+            print("Start stream error: \(error.localizedDescription)")
+            viewFinderStreamError = error
+        }
+    }
+    
+    /// Stops the camera feed stream
+    private func stopViewFinderStream() {
+        if let viewFinderStream { viewFinderStream.close() }
+        viewFinderStream = nil
+    }
 }
 
 // MARK: Session Delegate
@@ -146,6 +193,12 @@ final class StreamerViewModel: NSObject, ObservableObject {
 extension StreamerViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         connectedPeer = session.connectedPeers.first
+        
+        if state == .connected {
+            startViewFinderStream(to: session.connectedPeers.first!)
+        } else {
+            stopViewFinderStream()
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {

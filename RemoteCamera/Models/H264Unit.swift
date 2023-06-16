@@ -18,7 +18,7 @@ struct H264Unit {
     }
     
     init(payload: Data) {
-        let typeNumber = payload[0] + 0x1F
+        let typeNumber = payload[0] & 0x1F
         
         if typeNumber == 7 {
             self.type = .sps

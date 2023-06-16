@@ -28,7 +28,7 @@ final class StreamerPeerSession: NSObject {
     weak var delegate: StreamerPeerSessionDelegate?
     
     /// The ID of this peer device
-    private let peerID = MCPeerID(displayName: UIDevice.current.name)
+    private let peerID: MCPeerID
     
     /// An advertiser object to make this device discoverable to other peers.
     private let peerAdvertiser: MCNearbyServiceAdvertiser
@@ -40,6 +40,7 @@ final class StreamerPeerSession: NSObject {
     private var connectedHost: MCPeerID? = nil
     
     override init() {
+        peerID = MCPeerID(displayName: UIDevice.current.name)
         peerSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         peerAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: bonjourServiceType)
         
