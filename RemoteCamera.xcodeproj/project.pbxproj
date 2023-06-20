@@ -16,6 +16,7 @@
 		AB7E25EA2A38330C009ABFBF /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */; };
 		AB829CB12A30B59B00AF7C87 /* CMTime+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */; };
 		AB829CB32A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */; };
+		AB8E0D972A41575D00E01E15 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8E0D962A41575D00E01E15 /* Data+Extension.swift */; };
 		ABB3BA5C2A301C0300A4EF6C /* PeerRequestCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */; };
 		ABB49B932A36B3F800A70516 /* AssetWritingMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB49B922A36B3F800A70516 /* AssetWritingMetadata.swift */; };
 		ABB49B952A36B5DB00A70516 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB49B942A36B5DB00A70516 /* String+Extension.swift */; };
@@ -46,6 +47,7 @@
 		AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
 		AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+Extension.swift"; sourceTree = "<group>"; };
 		AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
+		AB8E0D962A41575D00E01E15 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		ABB3BA5B2A301C0300A4EF6C /* PeerRequestCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRequestCommands.swift; sourceTree = "<group>"; };
 		ABB49B922A36B3F800A70516 /* AssetWritingMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetWritingMetadata.swift; sourceTree = "<group>"; };
 		ABB49B942A36B5DB00A70516 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				ABB49B942A36B5DB00A70516 /* String+Extension.swift */,
 				ABB49B962A36D58600A70516 /* URL+Extension.swift */,
 				AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */,
+				AB8E0D962A41575D00E01E15 /* Data+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				ABB49B972A36D58600A70516 /* URL+Extension.swift in Sources */,
 				ABC5EAB92A2EBBB1001C9988 /* HostViewModel.swift in Sources */,
 				AB1535F92A3B44A8006F1F5D /* H264Encoder.swift in Sources */,
+				AB8E0D972A41575D00E01E15 /* Data+Extension.swift in Sources */,
 				ABC5EA9D2A2EBAF6001C9988 /* SceneDelegate.swift in Sources */,
 				ABC5EAC52A2EE45A001C9988 /* PeerRequest.swift in Sources */,
 				AB829CB32A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift in Sources */,
@@ -463,10 +467,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -497,10 +501,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -68,12 +68,12 @@ final class StreamerViewModel: NSObject, ObservableObject {
         peerAdvertiser.delegate = self
         peerAdvertiser.startAdvertisingPeer()
         
-        do {
-            try encoder.configureCompressionSession()
-            encoder.naluHandler = naluHandlingCallback(_:)
-        } catch {
-            print(error)
-        }
+//        do {
+//            try encoder.configureCompressionSession()
+//            encoder.naluHandler = naluHandlingCallback(_:)
+//        } catch {
+//            print(error)
+//        }
         
     }
     
@@ -91,13 +91,14 @@ final class StreamerViewModel: NSObject, ObservableObject {
             }
             return
         }
-        
+
         let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf).durationText
-        
+
         guard timestamp != trackedTimestamp else { return }
-        
+
         if let imageData = sbuf.createCGImageDataFromBuffer() {
             trackedTimestamp = timestamp
+            print("CGImage data size: \(imageData.size(units: [.useKB]))")
             do {
                 try PeerRequestCommands.sendVideoPreviewFrameCommand(using: peerSession, to: [connectedPeer], imageData: imageData)
             } catch {
@@ -110,8 +111,8 @@ final class StreamerViewModel: NSObject, ObservableObject {
     func sampleBufferCallback(_ sbuf: CMSampleBuffer) {
         switch recordingState {
         case .notRecording:
-            //shouldSendVideoFramesToHostPeer(using: sbuf)
-            encoder.encode(sbuf)
+            shouldSendVideoFramesToHostPeer(using: sbuf)
+            //encoder.encode(sbuf)
             break
         case .prepareForRecording:
             let sourceTime = CMSampleBufferGetPresentationTimeStamp(sbuf)
@@ -194,11 +195,11 @@ extension StreamerViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         connectedPeer = session.connectedPeers.first
         
-        if state == .connected {
-            startViewFinderStream(to: session.connectedPeers.first!)
-        } else {
-            stopViewFinderStream()
-        }
+//        if state == .connected {
+//            startViewFinderStream(to: session.connectedPeers.first!)
+//        } else {
+//            stopViewFinderStream()
+//        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {

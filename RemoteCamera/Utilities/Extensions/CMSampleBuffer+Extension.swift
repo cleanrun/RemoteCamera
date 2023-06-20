@@ -22,16 +22,28 @@ extension CMSampleBuffer {
     func createCGImageDataFromBuffer() -> Data? {
         var data: Data? = nil
         
+        if let image = createCGImageFromBuffer() {
+            data = image.pngData
+        }
+        
+        return data
+    }
+    
+    /// Creates a `CGImage` from the sample buffer's image buffer.
+    /// - Returns: Returns the created image. Returns `nil`if the image  could not be created.
+    func createCGImageFromBuffer() -> CGImage? {
+        var image: CGImage? = nil
+        
         DispatchQueue.global(qos: .utility).sync {
             if let imageBuffer = CMSampleBufferGetImageBuffer(self) {
                 let ciImage = CIImage(cvPixelBuffer: imageBuffer)
                 let ciContext = CIContext()
                 if let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent) {
-                    data = cgImage.pngData
+                    image = cgImage
                 }
             }
         }
         
-        return data
+        return image
     }
 }
