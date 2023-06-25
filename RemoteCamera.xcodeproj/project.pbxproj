@@ -11,8 +11,6 @@
 		AB1535FB2A3B5966006F1F5D /* H264Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1535FA2A3B5966006F1F5D /* H264Decoder.swift */; };
 		AB1535FD2A3B59BB006F1F5D /* H264Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1535FC2A3B59BB006F1F5D /* H264Unit.swift */; };
 		AB1535FF2A3B5B89006F1F5D /* NALUParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1535FE2A3B5B89006F1F5D /* NALUParser.swift */; };
-		AB196EE32A3BFA0E00B4D8FA /* HostPeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB196EE22A3BFA0E00B4D8FA /* HostPeerSession.swift */; };
-		AB196EE52A3BFA1700B4D8FA /* StreamerPeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB196EE42A3BFA1700B4D8FA /* StreamerPeerSession.swift */; };
 		AB7E25EA2A38330C009ABFBF /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */; };
 		AB829CB12A30B59B00AF7C87 /* CMTime+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */; };
 		AB829CB32A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */; };
@@ -42,8 +40,6 @@
 		AB1535FA2A3B5966006F1F5D /* H264Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H264Decoder.swift; sourceTree = "<group>"; };
 		AB1535FC2A3B59BB006F1F5D /* H264Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H264Unit.swift; sourceTree = "<group>"; };
 		AB1535FE2A3B5B89006F1F5D /* NALUParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NALUParser.swift; sourceTree = "<group>"; };
-		AB196EE22A3BFA0E00B4D8FA /* HostPeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostPeerSession.swift; sourceTree = "<group>"; };
-		AB196EE42A3BFA1700B4D8FA /* StreamerPeerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamerPeerSession.swift; sourceTree = "<group>"; };
 		AB7E25E92A38330C009ABFBF /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
 		AB829CB02A30B59B00AF7C87 /* CMTime+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+Extension.swift"; sourceTree = "<group>"; };
 		AB829CB22A30BA5200AF7C87 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
@@ -170,7 +166,6 @@
 			children = (
 				ABC5EA9E2A2EBAF6001C9988 /* StreamerViewController.swift */,
 				ABC5EAB62A2EBB83001C9988 /* StreamerViewModel.swift */,
-				AB196EE42A3BFA1700B4D8FA /* StreamerPeerSession.swift */,
 			);
 			path = Streamer;
 			sourceTree = "<group>";
@@ -180,7 +175,6 @@
 			children = (
 				ABC5EAB42A2EBB7A001C9988 /* HostViewController.swift */,
 				ABC5EAB82A2EBBB1001C9988 /* HostViewModel.swift */,
-				AB196EE22A3BFA0E00B4D8FA /* HostPeerSession.swift */,
 			);
 			path = Host;
 			sourceTree = "<group>";
@@ -281,7 +275,6 @@
 				ABC5EAB52A2EBB7A001C9988 /* HostViewController.swift in Sources */,
 				AB1535FB2A3B5966006F1F5D /* H264Decoder.swift in Sources */,
 				ABC5EABE2A2EC0D4001C9988 /* AssetWriter.swift in Sources */,
-				AB196EE32A3BFA0E00B4D8FA /* HostPeerSession.swift in Sources */,
 				ABB49B932A36B3F800A70516 /* AssetWritingMetadata.swift in Sources */,
 				ABC5EAB72A2EBB83001C9988 /* StreamerViewModel.swift in Sources */,
 				AB7E25EA2A38330C009ABFBF /* CGImage+Extension.swift in Sources */,
@@ -300,7 +293,6 @@
 				AB1535FD2A3B59BB006F1F5D /* H264Unit.swift in Sources */,
 				ABC5EAC02A2ED3E3001C9988 /* Constants.swift in Sources */,
 				AB829CB12A30B59B00AF7C87 /* CMTime+Extension.swift in Sources */,
-				AB196EE52A3BFA1700B4D8FA /* StreamerPeerSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

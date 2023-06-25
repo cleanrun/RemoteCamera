@@ -78,7 +78,11 @@ final class HostViewModel: NSObject, ObservableObject {
     
     /// Disconnects from the connected peer
     func disconnectFromPeer() {
-        peerSession.disconnect()
+        do {
+            try PeerRequestCommands.sendDisconnectCommand(using: peerSession, to: connectedPeers)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     /// Change the current FPS
@@ -146,6 +150,8 @@ extension HostViewModel: MCSessionDelegate {
             switch request.type {
             case .sendVideoPreviewFrame:
                 viewController?.setPreviewLayerContents(using: request.data)
+            case .requestToStartRecord, .requestToStopRecord:
+                changeRecordingState()
             default:
                 return
             }

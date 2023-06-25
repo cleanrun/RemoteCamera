@@ -187,6 +187,11 @@ final class StreamerViewModel: NSObject, ObservableObject {
         if let viewFinderStream { viewFinderStream.close() }
         viewFinderStream = nil
     }
+    
+    /// Disconnects from a connected host
+    private func disconnectFromHost() {
+        peerSession.disconnect()
+    }
 }
 
 // MARK: Session Delegate
@@ -209,6 +214,8 @@ extension StreamerViewModel: MCSessionDelegate {
                 changeRecordingState(RecordingState(rawValue: request.dataToString!)!)
             case .changeFPS:
                 viewController?.configureFrameRate(FPSState(rawValue: request.dataToString!)!)
+            case .disconnect:
+                disconnectFromHost()
             default:
                 break
             }

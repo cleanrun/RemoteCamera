@@ -23,4 +23,16 @@ extension CMTime {
             return String(format: "%02i:%02i", minutes, seconds)
         }
     }
+    
+    /// A String representation of the `CMTime` object based on UTC timezone
+    /// Source: https://stackoverflow.com/a/22871795/8279130
+    var timestampUTC: String {
+        let totalSeconds = CMTimeGetSeconds(self)
+        let date = Date(timeIntervalSince1970: totalSeconds)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss.SSS"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        return formatter.string(from: date)
+    }
+
 }

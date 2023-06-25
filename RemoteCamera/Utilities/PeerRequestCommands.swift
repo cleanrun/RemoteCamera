@@ -55,6 +55,45 @@ final class PeerRequestCommands {
             try session.send(requestData, toPeers: peers, with: .reliable)
     }
     
+    /// Sends a start recording request to the host peer
+    /// - Parameters:
+    ///   - session: The session used to send the request
+    ///   - peers: The peers to receive the request
+    static func sendStartRecordingRequest(
+        using session: MCSession,
+        to peers: [MCPeerID]) throws {
+            let request = PeerRequestMakeRequestToStartRecord()
+            let encoder = JSONEncoder()
+            let requestData = try encoder.encode(request)
+            try session.send(requestData, toPeers: peers, with: .reliable)
+    }
+    
+    /// Sends a stop recording request to the host peer
+    /// - Parameters:
+    ///   - session: The session used to send the request
+    ///   - peers: The peers to receive the request
+    static func sendStopRecordingRequest(
+        using session: MCSession,
+        to peers: [MCPeerID]) throws {
+            let request = PeerRequestMakeRequestToStopRecord()
+            let encoder = JSONEncoder()
+            let requestData = try encoder.encode(request)
+            try session.send(requestData, toPeers: peers, with: .reliable)
+    }
+    
+    /// Sends a disconnect request to the another peer
+    /// - Parameters:
+    ///   - session: The session used to send the request
+    ///   - peers: The peers to receive the request
+    static func sendDisconnectCommand(
+        using session: MCSession,
+        to peers: [MCPeerID]) throws {
+            let request = PeerRequestMakeDisconnectCommand()
+            let encoder = JSONEncoder()
+            let requestData = try encoder.encode(request)
+            try session.send(requestData, toPeers: peers, with: .reliable)
+    }
+    
     /// Handle incoming request data from another peer
     /// - Parameters:
     ///   - data: The incoming data to handle

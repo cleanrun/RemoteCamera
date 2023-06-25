@@ -39,6 +39,8 @@ struct PeerRequest: Codable {
     }
 }
 
+// MARK: - Request create functions
+
 /// Creates a request to change the streamers recording status
 /// - Parameter status: The status to change
 /// - Returns: Returns a `PeerRequest` object based on the requirements
@@ -58,4 +60,25 @@ func PeerRequestMakeSendVideoFrameRequest(_ image: Data) -> PeerRequest {
 /// - Returns: Returns a `PeerRequest` object based on the requirements
 func PeerRequestMakeChangeFPSRequest(_ fps: FPSState) -> PeerRequest {
     PeerRequest(type: .changeFPS, data: fps.rawValue.data(using: .utf8)!)
+}
+
+/// Creates a request to ask whether a recording process is possible to start
+/// - Returns: Returns a `PeerRequest` object based on the requirements
+func PeerRequestMakeRequestToStartRecord() -> PeerRequest {
+    let requestData = "RequestToStartRecord".data(using: .utf8)!
+    return PeerRequest(type: .requestToStartRecord, data: requestData)
+}
+
+/// Creates a request to ask whether a recording process is possible to stop
+/// - Returns: Returns a `PeerRequest` object based on the requirements
+func PeerRequestMakeRequestToStopRecord() -> PeerRequest {
+    let requestData = "RequestToStopRecord".data(using: .utf8)!
+    return PeerRequest(type: .requestToStopRecord, data: requestData)
+}
+
+/// Creates a request to disconnect the peer connection
+/// - Returns: Returns a `PeerRequest` object based on the requirements
+func PeerRequestMakeDisconnectCommand() -> PeerRequest {
+    let requestData = "Disconnect".data(using: .utf8)!
+    return PeerRequest(type: .disconnect, data: requestData)
 }

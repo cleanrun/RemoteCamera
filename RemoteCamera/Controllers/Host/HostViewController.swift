@@ -29,6 +29,7 @@ class HostViewController: UIViewController {
     /// A view that will have a `CALayer` acting as the preview layer for a connected streamer peer camera feed
     @IBOutlet weak var previewLayerView: UIView!
     
+    /// A `CALayer` to display incoming video frame buffers from a stream
     private var sampleBufferDisplayLayer: AVSampleBufferDisplayLayer!
     
     private var viewModel: HostViewModel!
@@ -104,7 +105,11 @@ class HostViewController: UIViewController {
     
     @IBAction private func buttonActions(_ sender: UIButton) {
         if sender == connectButton {
-            showPeerBrowserModal()
+            if viewModel.connectedPeers.isEmpty {
+                showPeerBrowserModal()
+            } else {
+                viewModel.disconnectFromPeer()
+            }
         } else if sender == recordButton {
             viewModel.changeRecordingState()
         } else if sender == seeVideoButton {

@@ -18,6 +18,9 @@ enum PeerRequestType: String, Codable {
     case changeRecordingStatus
     case sendVideoPreviewFrame
     case changeFPS
+    case requestToStartRecord
+    case requestToStopRecord
+    case disconnect
 }
 
 enum FPSState: String, Codable {
