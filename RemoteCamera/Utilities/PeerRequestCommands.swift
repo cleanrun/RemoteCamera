@@ -33,8 +33,9 @@ final class PeerRequestCommands {
     static func sendVideoPreviewFrameCommand(
         using session: MCSession,
         to peers: [MCPeerID],
-        imageData: Data) throws {
-            let request = PeerRequestMakeSendVideoFrameRequest(imageData)
+        imageData: Data,
+        timestamp: String) throws {
+            let request = PeerRequestMakeSendVideoFrameRequest(imageData, timestamp: timestamp)
             let encoder = JSONEncoder()
             let requestData = try encoder.encode(request)
             try session.send(requestData, toPeers: peers, with: .reliable)

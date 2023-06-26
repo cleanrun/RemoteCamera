@@ -23,7 +23,7 @@ extension CMSampleBuffer {
         var data: Data? = nil
         
         if let image = createCGImageFromBuffer() {
-            data = image.pngData
+            data = image.createResizedPngData()
         }
         
         return data

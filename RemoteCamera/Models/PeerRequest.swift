@@ -10,6 +10,7 @@ import Foundation
 struct PeerRequest: Codable {
     let type: PeerRequestType
     let data: Data
+    let timestamp: String?
     
     /// A String representation of the data
     var dataToString: String? {
@@ -19,27 +20,29 @@ struct PeerRequest: Codable {
     enum CodingKeys: String, CodingKey {
         case type
         case data
+        case timestamp
     }
     
-    fileprivate init(type: PeerRequestType, data: Data) {
+    fileprivate init(type: PeerRequestType, data: Data, timestamp: String? = nil) {
         self.type = type
         self.data = data
+        self.timestamp = timestamp
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         type = try values.decode(PeerRequestType.self, forKey: .type)
         data = try values.decode(Data.self, forKey: .data)
+        timestamp = try? values.decode(String.self, forKey: .timestamp)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
         try container.encode(data, forKey: .data)
+        try? container.encode(timestamp, forKey: .timestamp)
     }
 }
-
-// MARK: - Request create functions
 
 /// Creates a request to change the streamers recording status
 /// - Parameter status: The status to change
@@ -51,8 +54,8 @@ func PeerRequestMakeChangeRecordingStatusRequest(_ status: RecordingState) -> Pe
 /// Creates a request to send a video frame data
 /// - Parameter image: The video frame data, this should be a `CGImage` converted to `Data`
 /// - Returns: Returns a `PeerRequest` object based on the requirements
-func PeerRequestMakeSendVideoFrameRequest(_ image: Data) -> PeerRequest {
-    PeerRequest(type: .sendVideoPreviewFrame, data: image)
+func PeerRequestMakeSendVideoFrameRequest(_ image: Data, timestamp: String) -> PeerRequest {
+    PeerRequest(type: .sendVideoPreviewFrame, data: image, timestamp: timestamp)
 }
 
 /// Creates a request to send a video frame data

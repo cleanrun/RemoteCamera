@@ -91,20 +91,31 @@ final class StreamerViewModel: NSObject, ObservableObject {
             }
             return
         }
-
-        let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf).durationText
-
-        guard timestamp != trackedTimestamp else { return }
-
-        if let imageData = sbuf.createCGImageDataFromBuffer() {
+        
+        let timestamp = CMSampleBufferGetPresentationTimeStamp(sbuf).timestampUTC
+        
+        if trackedTimestamp == nil {
             trackedTimestamp = timestamp
-            print("CGImage data size: \(imageData.size(units: [.useKB]))")
-            do {
-                try PeerRequestCommands.sendVideoPreviewFrameCommand(using: peerSession, to: [connectedPeer], imageData: imageData)
-            } catch {
-                print("error while sending data: \(error.localizedDescription)")
+        }
+        
+        let ms = Int(String(timestamp.suffix(3).first!))!
+        let trackedMs = Int(String(trackedTimestamp!.suffix(3).first!))!
+        
+        if ms % 2 == 0 {
+            guard ms != trackedMs else { return }
+            print("\(ms)")
+            
+            if let imageData = sbuf.createCGImageDataFromBuffer() {
+                trackedTimestamp = timestamp
+                print("CGImage data size: \(imageData.size(units: [.useKB]))")
+                do {
+                    try PeerRequestCommands.sendVideoPreviewFrameCommand(using: peerSession, to: [connectedPeer], imageData: imageData, timestamp: timestamp)
+                } catch {
+                    print("error while sending data: \(error.localizedDescription)")
+                }
             }
         }
+        
     }
     
     /// Process the sample buffer, append the buffers if currently recording a video

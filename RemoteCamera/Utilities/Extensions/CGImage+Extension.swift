@@ -12,11 +12,11 @@ extension CGImage {
     
     /// Creates a PNG data representation
     /// Source: https://stackoverflow.com/a/48312429/8279130
-    var pngData: Data? {
+    func createResizedPngData(orientation: UIImage.Orientation = .left, resizeTo size: CGSize = CGSizeMake(180, 240)) -> Data? {
         guard let mutableData = CFDataCreateMutable(nil, 0),
               let destination = CGImageDestinationCreateWithData(mutableData, "public.png" as CFString, 1, nil),
               let compressedImage = UIImage(data: UIImage(cgImage: self, scale: 1, orientation: .left).jpegData(compressionQuality: 0.05)!)?.cgImage,
-              let orientedImage = compressedImage.createMatchingBackingDataWithImage(imageRef: compressedImage, orientation: .left)
+              let orientedImage = compressedImage.createMatchingBackingDataWithImage(imageRef: compressedImage, orientation: orientation)?.resize(to: size)
         else { return nil }
         
         CGImageDestinationAddImage(destination, orientedImage, nil)
@@ -120,5 +120,27 @@ extension CGImage {
         }
 
         return orientedImage
+    }
+    
+    // Resizes the image based on a given width and size
+    /// - Parameter size: The desired size for resizing
+    /// - Returns: Returns the resized image. Returns`nil` if failed.
+    /// Source: https://rockyshikoku.medium.com/resize-cgimage-baf23a0f58ab
+    func resize(to size: CGSize) -> CGImage? {
+        let width = Int(size.width)
+        let height = Int(size.height)
+        
+        let bytesPerPixel = bitsPerPixel / bitsPerComponent
+        let destBytesPerRow = width * bytesPerPixel
+        
+        guard
+            let colorSpace,
+            let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: destBytesPerRow, space: colorSpace, bitmapInfo: alphaInfo.rawValue)
+        else { return nil }
+        
+        context.interpolationQuality = .high
+        context.draw(self, in: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        return context.makeImage()
     }
 }
